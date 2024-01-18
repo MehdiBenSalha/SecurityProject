@@ -95,6 +95,29 @@ Then we add the certificates :
 <img src="/Screenshots/Untitled 20.png" width="600">
 	
 ## Apache
+We start by downloading the needed packages : 
+```sh
+sudo apt-get install apache2-utils
+sudo apt-get install libapache2-mod-ldap-userdir
+```
+Create an index.html page in the folder you want to protect (in our case, it will be "/var/www/html/protected") :
+Configure the file /etc/apache2/sites-available/000-default.conf.
+
+```sh
+<Directory "/var/www/html/protected">
+	AuthType Basic
+	AuthName "Restricted Access"
+	AuthBasicProvider ldap
+	AuthLDAPURL "ldap://localhost/dc=insat,dc=tn?uid?sub?(objectClass=*)"
+	AuthLDAPGroupAttribute memberUid
+	AuthLDAPGroupAttributeIsDN off
+	AuthLDAPBindDN "cn=admin,dc=insat,dc=tn"
+	AuthLDAPBindPassword "kali"
+	Require ldap-filter &(objectClass=posixAccount)(memberof=CN=group1,OU=group,dc=insat,dc=tn)
+	Require ldap-group CN=group1,OU=group,dc=insat,dc=tn
+</Directory>
+```
+With this configuration, if you try to access server.insat.tn/protected, you will be prompted to enter a login and password that are registered in the LDAP server. Additionally, only users from group1 have access to this page.
 
 ### DEMO Apache with LDAP 
 We try to login with "user2" who's part of the groupe 2 => ACESS DENIED
