@@ -30,7 +30,7 @@ By adding this line :
 ```
 We obtain : 
 
-<img src="/Screenshots/Untitled.png" width="100">
+<img src="/Screenshots/Untitled.png" width="250">
 
 Install the OpenLDAP package.
 ```sh
