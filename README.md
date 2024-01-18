@@ -5,6 +5,7 @@
 -  [Apache](#apache) 
 -  [OpenVPN](#openvpn) 
 -  [DNS](#dns) 
+-  [Kerberos](#kerberos) 
 ## Introduction
 This project focuses on configuring and validating network services, emphasizing authentication with OpenLDAP, SSH, Apache, and OpenVPN. Divided into three parts, it covers OpenLDAP setup, SSH and Apache integration, OpenVPN configuration, DNS management, and Kerberos authentication. The repository serves as a guide for implementing secure network services, providing comprehensive documentation for replication and understanding of network security practices.
 ## OpenLDAP
@@ -218,6 +219,7 @@ You will be prompted to enter a login and password stored in the LDAP server.
 <img src="/Screenshots/OPENVPN-LOGIN.gif">
 
 ## DNS
+### Creating the server
 We start by installing “bind9”
 ```sh
 sudo apt install bind9
@@ -268,6 +270,13 @@ nslookup apache.insat.tn
 ```
 <img src="/Screenshots/Untitled 61.png" width="400">
 
+## KERBEROS
 
+Configure the hostname and FQDN of the server machine and the client machine :
+```sh
+sudo hostname set-hostname kdc.insat.tn
+sudo hostname set-hostname client.insat.tn
+```
+Modify the /etc/hosts file on both sides :
 
-
+<img src="/Screenshots/Untitled 62.png" width="600">
