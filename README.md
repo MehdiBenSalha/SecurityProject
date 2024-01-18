@@ -272,6 +272,8 @@ nslookup apache.insat.tn
 
 ## KERBEROS
 
+### Configure KERBEROS server
+
 Configure the hostname and FQDN of the server machine and the client machine :
 ```sh
 sudo hostname set-hostname kdc.insat.tn
@@ -341,5 +343,43 @@ Write down what you have entered :
 <img src="/Screenshots/Untitled 81.png" width="400">
 
 <img src="/Screenshots/Untitled 82.png" width="600">
+
+Add the host to the keytab :
+
+<img src="/Screenshots/Untitled 84.png" width="600">
+
+### Configure OpenSSH with KERBEROS
+We install OpenSSH : 
+```sh
+sudo apt install openssh-server
+sudo vim /etc/ssh/sshd_config
+```
+We uncomment these 2 lignes : 
+
+<img src="/Screenshots/Untitled 86.png" width="250">
+
+```sh
+sudo vim /etc/ssh/ssh_config
+```
+
+We uncomment these 2 lignes too : 
+
+<img src="/Screenshots/Untitled 87.png" width="250">
+
+Then restart the service : 
+```sh
+sudo systemctl restart ssh
+```
+
+We install `krb5-user` :
+```sh
+sudo apt install krb5-user
+```
+
+Puis on teste le fonctionnement : 
+
+<img src="/Screenshots/Untitled 90.png" width="400">
+
+<img src="/Screenshots/Untitled 91.png" width="400">
 
 
