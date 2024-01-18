@@ -97,6 +97,66 @@ Then we add the certificates :
 
 <img src="/Screenshots/Untitled 20.png" width="600">
 
+We create the file ssl_ldap.ldif
+
+<img src="/Screenshots/Untitled 21.png" width="600">
+
+We execute this command to add the certificates
+
+<img src="/Screenshots/Untitled 22.png" width="600">
+
+modify the file /etc/default/slapd
+
+<img src="/Screenshots/Untitled 23.png" width="600">
+
+then we will modify the file /etc/ldap/ldap.conf
+
+<img src="/Screenshots/Untitled 24.png" width="600">
+
+Finally we can use LDAPS 
+
+<img src="/Screenshots/Untitled 25.png" width="600">
+
+#### Use LDAP server from a client machine : 
+
+we add the server ldap to the file /etc/hosts to easily access it
+
+<img src="/Screenshots/Untitled 27.png" width="600">
+
+then install LDAP Packages 
+
+```sh
+sudo apt install libnss-ldap libpam-ldap ldap-utils nscd -y
+```
+ <img src="/Screenshots/Untitled 29.png" width="600">
+
+ <img src="/Screenshots/Untitled 30.png" width="600">
+ 
+and configure /etc/nsswitch.conf
+
+ <img src="/Screenshots/Untitled 31.png" width="600">
+ 
+ add this line to the file /etc/pam.d/common-session
+ 
+  <img src="/Screenshots/Untitled 32.png" width="600">
+
+  Now we can successfully search for users and log in using LDAP
+  
+    <img src="/Screenshots/Untitled 33.png" width="600">
+    
+     <img src="/Screenshots/Untitled 34.png" width="600">
+     
+ Also for LDAPS 
+ 
+      <img src="/Screenshots/Untitled 35.png" width="600">
+      
+####  Advantages of using LDAPS: 
+1. **Encryption of Communications:** LDAPS uses SSL/TLS to encrypt communications between the client and the LDAP server, ensuring the confidentiality of data during transit. 
+2.  **Secure Authentication:** LDAPS provides secure authentication, meaning that credentials are transmitted securely, reducing the risk of credential theft. 
+3. **Data Integrity:** The SSL/TLS layer ensures the integrity of data exchanged between the client and the server, preventing any unauthorized alteration of information during transit. 
+4. **Protection Against Passive Listening:** LDAPS protects against passive listening, where an attacker could intercept network traffic to retrieve sensitive information. 
+5.  **Compliance with Security Standards:** The use of LDAPS adheres to best security practices and industry standards for securing LDAP communications.  
+   
 ## SSH
 	
 ## Apache
