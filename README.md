@@ -57,3 +57,6 @@ Configure LDAP Account Manager.
 ```sh
 On accéde à 192.168.56.102/lam
 ```
+Afterward, create users and groups, and assign each user to a group, we obtain the following tree : 
+<img src="/Screenshots/Untitled 92.png" width="400">
+	
