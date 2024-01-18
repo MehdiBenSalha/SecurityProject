@@ -81,6 +81,18 @@ We affect the users to the previously created groups :
 We obtain this tree : 
 
 <img src="/Screenshots/Untitled 92.png" width="250">
+
+To test LDAP Directory, execute the following command :
+```sh
+ldapsearch -x -LLL -H ldap:/// -b dc=insat,dc=tn '(uid=user1)'
+```
+Then we add the certificates : 
+
+<img src="/Screenshots/Untitled 18.png" width="600">
+
+<img src="/Screenshots/Untitled 19.png" width="600">
+
+<img src="/Screenshots/Untitled 20.png" width="600">
 	
 ## Apache
 
