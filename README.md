@@ -55,18 +55,31 @@ Configure LDAP Account Manager.
 On accéde à 192.168.56.102/lam
 ```
 Afterward, create users and groups, and assign each user to a group, we obtain the following tree : 
+
 <img src="/Screenshots/Untitled 2.png" width="250">
+
 <img src="/Screenshots/Untitled 3.png" width="250">
+
 <img src="/Screenshots/Untitled 4.png" width="250">
+
 <img src="/Screenshots/Untitled 5.png" width="400">
+
 <img src="/Screenshots/Untitled 6.png" width="300">
+
 <img src="/Screenshots/Untitled 7.png" width="400">
+
 We create the groups : 
+
 <img src="/Screenshots/Untitled 12.png" width="400">
+
 We affect the users to the previously created groups :
+
 <img src="/Screenshots/Untitled 15.png" width="400">
+
 <img src="/Screenshots/Untitled 16.png" width="400">
+
 We obtain this tree : 
+
 <img src="/Screenshots/Untitled 92.png" width="400">
 	
 ## Apache
