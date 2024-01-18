@@ -66,11 +66,11 @@ Afterward, create users and groups, and assign each user to a group, we obtain t
 
 <img src="/Screenshots/Untitled 6.png" width="300">
 
-<img src="/Screenshots/Untitled 7.png" width="400">
+<img src="/Screenshots/Untitled 7.png" width="600">
 
 We create the groups : 
 
-<img src="/Screenshots/Untitled 12.png" width="400">
+<img src="/Screenshots/Untitled 12.png" width="600">
 
 We affect the users to the previously created groups :
 
