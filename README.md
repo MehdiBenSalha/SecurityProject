@@ -249,4 +249,25 @@ The we define our DNS records for OpenLDAP, Apache and OpenVPN :
 
 <img src="/Screenshots/Untitled 56.png" width="400">
 
+### Validation and Testing 
+Launch the DNS server :
+```sh
+sudo /usr/sbin/named -g -c /etc/bind/named.conf -u bind
+```
+We add the DNS server ip in the client distant machine : 
+```sh
+sudo nano /etc/resolv.conf
+```
+<img src="/Screenshots/Untitled 60.png" width="400">
+
+Finally we test the different defined services :
+```sh
+nslookup ldap.insat.tn
+nslookup openvpn.insat.tn
+nslookup apache.insat.tn
+```
+<img src="/Screenshots/Untitled 61.png" width="400">
+
+
+
 
