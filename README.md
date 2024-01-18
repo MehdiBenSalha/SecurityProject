@@ -30,7 +30,7 @@ By adding this line :
 ```
 We obtain : 
 
-![Untitled](/Screenshots/Untitled.png)
+![Untitled](/Screenshots/Untitled.png | width=100)
 
 Install the OpenLDAP package.
 ```sh
