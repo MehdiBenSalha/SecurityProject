@@ -101,6 +101,7 @@ sudo apt-get install apache2-utils
 sudo apt-get install libapache2-mod-ldap-userdir
 ```
 Create an index.html page in the folder you want to protect (in our case, it will be "/var/www/html/protected") :
+
 Configure the file /etc/apache2/sites-available/000-default.conf.
 
 ```sh
@@ -123,4 +124,95 @@ With this configuration, if you try to access server.insat.tn/protected, you wil
 We try to login with "user2" who's part of the groupe 2 => ACESS DENIED
 
 Then we login with "user1" who's part of the groupe 1 => ACESS ALLOWED
+
 <img src="/Screenshots/APACHE-WITH-LDAP.gif">
+
+## OpenVPN
+For the installation and configuration of the OpenVPN server, we used an installation script. 
+
+To download it :
+
+```sh
+wget https://git.io/vpn -O openvpn-install.sh && bash openvpn-install.sh
+sudo chmod +x openvpn-install.sh
+```
+
+Run it with `sudo bash openvpn-install.sh` and configure some server parameters.
+
+<img src="/Screenshots/Untitled 39.png" width="600">
+
+A `server.conf` file will be created in `/etc/openvpn/server` with all the necessary certificates.
+
+<img src="/Screenshots/Untitled 40.png" width="600">
+
+Add these two lines to `server.conf` :
+```sh
+plugin /usr/lib/openvpn/openvpn-auth-ldap.so /etc/openvpn/auth/auth-ldap.conf
+verify client-cert optional
+```
+Another file, `user1.ovpn` (the client configuration file), will be created in `/root`. 
+
+Add "auth-user-pass" to this file and remove the key and cert sections.
+
+To enable LDAP authentication, install the `openvpn-auth-ldap` package.
+```sh
+sudo apt install openvpn-auth-ldap
+```
+The module will be installed in "/usr/lib/openvpn/openvpn-auth-ldap.so". 
+
+Create the configuration file "/etc/openvpn/auth/auth-ldap.conf".
+```sh
+<LDAP>
+	# LDAP server URL
+	URL ldap://192.168.56.102
+	# Bind DN (If your LDAP server doesn't support anonymous binds)
+	BindDN cn=admin,dc=insat,dc=tn
+	# Bind Password
+	Password kali
+	# Network timeout (in seconds)
+	Timeout 15
+	# Enable Start TLS
+	TLSEnable no
+</LDAP>
+<Authorization>
+	# Base DN
+	BaseDN ou=user,dc=insat,dc=tn
+	# User Search Filter
+	SearchFilter "(&(uid=%u)(objectClass=posixAccount))"
+	# Require Group Membership
+	RequireGroup true
+	<Group>
+		# Default is true. Match full user DN if true, uid only if false.
+		RFC2307bis false
+		BaseDN ou=group,dc=insat,dc=tn
+		SearchFilter "(|(cn=group1))"
+		MemberAttribute memberUid
+		# Add group members to a PF table (disabled)
+		#PFTable ips_vpn_eng
+	</Group>
+</Authorization>
+```
+
+Restart the OpenVPN service :
+```sh
+systemctl restart openvpn-server@server
+```
+Add port 389 (LDAP port) to the firewall of the LDAP server : 
+```sh
+sudo ufw allow 389
+```
+Start the OpenVPN server : 
+```sh
+cd /etc/openvpn/server
+sudo openvpn --config server.conf
+```
+On the client machine, perform the same steps with the "user1.ovpn" file :
+```sh
+cd /root
+sudo openvpn --config user1.conf
+```
+You will be prompted to enter a login and password stored in the LDAP server. 
+> Warning : Only users from group1 can connect to the server.
+### DEMO Login OpenVPN with LDAP user
+<img src="/Screenshots/OPENVPN-LOGIN.gif">
+
