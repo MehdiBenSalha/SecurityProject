@@ -74,13 +74,13 @@ We create the groups :
 
 We affect the users to the previously created groups :
 
-<img src="/Screenshots/Untitled 15.png" width="400">
+<img src="/Screenshots/Untitled 15.png" width="600">
 
-<img src="/Screenshots/Untitled 16.png" width="400">
+<img src="/Screenshots/Untitled 16.png" width="600">
 
 We obtain this tree : 
 
-<img src="/Screenshots/Untitled 92.png" width="400">
+<img src="/Screenshots/Untitled 92.png" width="250">
 	
 ## Apache
 
