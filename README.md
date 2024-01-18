@@ -162,13 +162,17 @@ and configure /etc/nsswitch.conf
 To enable SSH authentication via OpenLDAP, you need to configure your SSH server to use OpenLDAP as the authentication source.Here's a step-by-step guide:
 
 - install libpam-ldap
+  
 ```sh
 sudo apt-get install libpam-ldap
 ```
 - configure libpam-ldap
  <img src="/Screenshots/Untitled 36.png" width="600">
+ 
  <img src="/Screenshots/Untitled 37.png" width="600">
+ 
 - add those lines to /etc/ssh/sshd_config
+
 ```sh
 PasswordAuthentication yes 
 UsePAM yes 
@@ -176,12 +180,15 @@ AuthorizedKeysCommand /Desktop/proj/ldap-ssh-keys.sh
 AuthorizedKeysCommandUser nobody
 ```
 - create the script ldap-ssh_keys.sh
+
 ```sh
 #!/bin/bash
 ldapsearch -x -LLL -H ldapi:/// -D "cn=admin,dc=insat,dc=tn" -W -b
  "ou=user,dc=insat,dc=tn" "(uid=$1)" sshPublicKey | grep -oP "sshPublicKey: \K.*"
+
 ``` 
-- restart SSH service 
+- restart SSH service
+ 
 ```sh
 sudo service ssh restart
 ```	
