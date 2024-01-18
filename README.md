@@ -280,3 +280,66 @@ sudo hostname set-hostname client.insat.tn
 Modify the /etc/hosts file on both sides :
 
 <img src="/Screenshots/Untitled 62.png" width="600">
+
+Install the Kerberos packages : 
+```sh
+sudo apt install krb5-kdc krb5-admin-server krb5-config
+```
+<img src="/Screenshots/Untitled 64.png" width="600">
+
+<img src="/Screenshots/Untitled 65.png" width="600">
+
+<img src="/Screenshots/Untitled 66.png" width="600">
+
+Create a new realm :
+```sh
+sudo -s
+cd /etc/krb5kdc
+krb5_newrealm
+```
+<img src="/Screenshots/Untitled 69.png" width="600">
+
+We edit the `/etc/krb5kdc/kadm5.acl` file : 
+
+<img src="/Screenshots/Untitled 70.png" width="600">
+
+We create principals :
+```sh
+sudo -s
+cd /etc/krb5kdc
+kadmin.local
+```
+<img src="/Screenshots/Untitled 72.png" width="600">
+
+```sh
+add_principal user 
+add_principal root/admin
+add_principal host/kdc.insat.tn
+```
+
+Exit `kadmin.local` by typing `q`. 
+
+Restart your services :
+```sh
+sudo systemctl restart krb5-admin-server
+sudo systemctl restart krb5-kdc
+```
+
+Proceed to use ktutil to create the keytab :
+```sh
+sudo -s
+cd /etc/krb5kdc
+kutil
+```
+
+Add a line in the keytab : 
+
+<img src="/Screenshots/Untitled 80.png" width="700">
+
+Write down what you have entered :
+
+<img src="/Screenshots/Untitled 81.png" width="400">
+
+<img src="/Screenshots/Untitled 82.png" width="600">
+
+
