@@ -4,6 +4,7 @@
 -  [OpenLDAP](#openldap) 
 -  [Apache](#apache) 
 -  [OpenVPN](#openvpn) 
+-  [DNS](#dns) 
 ## Introduction
 This project focuses on configuring and validating network services, emphasizing authentication with OpenLDAP, SSH, Apache, and OpenVPN. Divided into three parts, it covers OpenLDAP setup, SSH and Apache integration, OpenVPN configuration, DNS management, and Kerberos authentication. The repository serves as a guide for implementing secure network services, providing comprehensive documentation for replication and understanding of network security practices.
 ## OpenLDAP
@@ -215,4 +216,37 @@ You will be prompted to enter a login and password stored in the LDAP server.
 > Warning : Only users from group1 can connect to the server.
 ### DEMO Login OpenVPN with LDAP user
 <img src="/Screenshots/OPENVPN-LOGIN.gif">
+
+## DNS
+We start by installing “bind9”
+```sh
+sudo apt install bind9
+```
+We add the DNS server ip
+```sh
+sudo nano /etc/resolv.conf
+```
+<img src="/Screenshots/Untitled 48.png" width="400">
+
+We define our forwarders in `the named.conf.options` file :
+```sh
+cd /etc/bind
+sudo nano named.conf.options
+```
+<img src="/Screenshots/Untitled 50.png" width="400">
+
+We create a forward zone by defining it in the named.conf.local file, named `insat.tn` which points to `db.insat.tn`.
+
+<img src="/Screenshots/Untitled 51.png" width="400">
+
+We create the `db.insat.tn` file :
+```sh
+cd /etc/bind
+mkdir /zones
+sudo nano db.insat.tn
+```
+The we define our DNS records for OpenLDAP, Apache and OpenVPN :
+
+<img src="/Screenshots/Untitled 56.png" width="400">
+
 
