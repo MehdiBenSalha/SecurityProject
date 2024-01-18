@@ -376,9 +376,9 @@ We install `krb5-user` :
 sudo apt install krb5-user
 ```
 
-Puis on teste le fonctionnement : 
+Then, test if everything works perfectly :
 
-<img src="/Screenshots/Untitled 90.png" width="400">
+<img src="/Screenshots/Untitled 90.png" width="400">	
 
 <img src="/Screenshots/Untitled 91.png" width="400">
 
