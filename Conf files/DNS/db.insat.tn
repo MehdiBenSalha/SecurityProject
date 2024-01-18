@@ -1,0 +1,19 @@
+;
+; BIND data file for insat.tn
+;
+$TTL    604800
+@       IN      SOA     ns1.insat.tn. root.insat.tn. (
+                              3         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+
+     IN      NS      ns1.insat.tn.
+
+; name servers - A records
+ns1.insat.tn.       IN      A      192.168.56.105                  
+openvpn.insat.tn.        IN      A      10.0.2.15
+ldap.insat.tn.        IN      A      192.168.56.102
+apache.insat.tn.        IN      A      192.168.56.102
+kdc.insat.tn.        IN      A      192.168.56.105
